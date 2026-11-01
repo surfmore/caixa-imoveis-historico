@@ -1,10 +1,10 @@
 {
   "versao": 1,
   "status": "erro",
-  "inicio": "2026-11-01T17:52:04.638367-03:00",
-  "fim": "2026-11-01T17:52:07.426013-03:00",
+  "inicio": "2026-11-01T17:55:12.048708-03:00",
+  "fim": "2026-11-01T17:55:14.569615-03:00",
   "tipo_erro": "PortalBloqueado",
   "erro": "A CAIXA redirecionou para validação externa. Tente novamente mais tarde e confira o portal no navegador.",
-  "workflow": "https://github.com/surfmore/caixa-imoveis-historico/actions/runs/41349028208",
-  "registrado_em": "2026-11-01T17:52:07.426033-03:00"
+  "workflow": "https://github.com/surfmore/caixa-imoveis-historico/actions/runs/41349243707",
+  "registrado_em": "2026-11-01T17:55:14.569635-03:00"
 }
