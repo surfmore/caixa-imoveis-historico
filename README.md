@@ -32,9 +32,9 @@ As planilhas ficam em Releases. Nenhum arquivo é armazenado como artefato do Ac
 
 A gratuidade depende das políticas vigentes e dos limites de uso do GitHub; não constitui garantia de capacidade ilimitada ou de condições comerciais imutáveis. Se houver mudança de política, revise a configuração antes de continuar.
 
-O GitHub pode atrasar ou perder disparos em períodos de alta carga. Em repositórios públicos sem atividade por 60 dias, o agendamento pode ser desativado. A primeira execução na nuvem ainda precisa comprovar que a CAIXA aceita o IP do runner; bloqueio vira erro, sem arquivar HTML.
+O GitHub pode atrasar ou perder disparos em períodos de alta carga. Em repositórios públicos sem atividade por 60 dias, o agendamento pode ser desativado. A coleta no runner foi validada em 01/11/2026. A CAIXA pode recusar consultas; nesse caso o processo registra erro, sem arquivar HTML.
 
-As coletas Windows existentes permanecem preservadas. O arquivo inicial na nuvem terá seu próprio horário de download. Até validar o workflow remoto, mantenha a tarefa Windows.
+As coletas Windows existentes permanecem preservadas. O arquivo inicial na nuvem terá seu próprio horário de download. A tarefa Windows e os arquivos locais foram preservados. Não há sincronização automática do histórico local com as Releases.
 
 ## Dados e modalidades
 
@@ -52,3 +52,11 @@ Nenhuma UI foi publicada nesta etapa. Uma UI futura poderá consultar o índice 
 - https://docs.github.com/en/billing/concepts/product-billing/github-actions
 - https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases
 - https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
+
+## Validação real
+
+Em 01/11/2026, 28 testes passaram no runner Ubuntu do GitHub. Uma planilha com 23.667 imóveis foi publicada em Releases; uma execução posterior confirmou sem_alteracao e manteve somente um CSV.
+
+Última execução validada: https://github.com/surfmore/caixa-imoveis-historico/actions/runs/41349707985
+
+Último resultado: [status/ultima_execucao.json](status/ultima_execucao.json). Planilhas: https://github.com/surfmore/caixa-imoveis-historico/releases
