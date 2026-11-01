@@ -47,7 +47,9 @@ jobs:
         if: github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python executar_nuvem.py
+        run: |
+          sleep 60
+          python executar_nuvem.py
 
       - name: Preservar o registro da consulta
         if: always() && steps.coleta.outcome != 'skipped'
