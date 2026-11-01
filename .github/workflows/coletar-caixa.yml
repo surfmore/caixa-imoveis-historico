@@ -1,0 +1,66 @@
+name: Coletar lista nacional da CAIXA
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/coletar-caixa.yml'
+      - 'coletar_caixa.py'
+      - 'executar_nuvem.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: historico-caixa
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    if: github.event.repository.private == false && github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Preparar Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+
+      - name: Verificar as proteções do coletor
+        run: python -m unittest discover -s tests -v
+
+      - name: Coletar e arquivar em Releases
+        id: coleta
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python executar_nuvem.py
+
+      - name: Conferir restauração e deduplicação após atualizar o código
+        if: github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python executar_nuvem.py
+
+      - name: Preservar o registro da consulta
+        if: always() && steps.coleta.outcome != 'skipped'
+        env:
+          BRANCH: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -d status ]; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- status
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Registrar consulta da lista CAIXA"
+          git pull --rebase origin "$BRANCH"
+          git push origin "HEAD:$BRANCH"
