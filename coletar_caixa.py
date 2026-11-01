@@ -96,18 +96,22 @@ def requisitar(opener, url, limite, timeout):
         return data, headers, response.url
 
 
-def baixar_lista(timeout=60, tentativas=3):
+def baixar_lista(timeout=60, tentativas=3, consultar_pagina=True):
     """Usa o mesmo arquivo da opção Todos e mantém cookies somente nesta execução."""
     for tentativa in range(1, tentativas + 1):
         try:
             opener = build_opener(RedirecionamentoOficial(), HTTPCookieProcessor(CookieJar()))
-            pagina, _, _ = requisitar(opener, PAGE_URL, 2_000_000, timeout)
-            html = pagina.decode('utf-8', errors='replace')
-            if not re.search(r'<option\b[^>]*value=[\'\"]geral[\'\"]', html, re.I):
-                raise PortalBloqueado('Página não contém a opção Todos (geral). O portal pode ter mudado ou bloqueado a consulta.')
-            # O sufixo variável é o que a própria página oficial usa para evitar cache.
-            match = re.search(r'\.csv\?(\d+)', html)
-            sufixo = match.group(1) if match else str(time.time_ns())
+            if consultar_pagina:
+                pagina, _, _ = requisitar(opener, PAGE_URL, 2_000_000, timeout)
+                html = pagina.decode('utf-8', errors='replace')
+                if not re.search(r'<option\b[^>]*value=[\'\"]geral[\'\"]', html, re.I):
+                    raise PortalBloqueado('Página não contém a opção Todos (geral). O portal pode ter mudado ou bloqueado a consulta.')
+                # O sufixo variável é o que a própria página oficial usa para evitar cache.
+                match = re.search(r'\.csv\?(\d+)', html)
+                sufixo = match.group(1) if match else str(time.time_ns())
+            else:
+                # Exportação nacional pública, idêntica ao botão Todos da página.
+                sufixo = str(time.time_ns())
             url = CSV_URL + '?' + sufixo
             conteudo, headers, final_url = requisitar(opener, url, MAX_BYTES, timeout)
             return conteudo, {'url_solicitada': url, 'url_final': final_url,
@@ -291,11 +295,11 @@ def registrar_evento(diretorio, evento):
         os.fsync(log.fileno())
 
 
-def executar(diretorio, timeout=60, tentativas=3):
+def executar(diretorio, timeout=60, tentativas=3, consultar_pagina=True):
     inicio = agora()
     with trava(diretorio):
         try:
-            conteudo, info = baixar_lista(timeout, tentativas)
+            conteudo, info = baixar_lista(timeout, tentativas, consultar_pagina=consultar_pagina)
             evento = arquivar(diretorio, conteudo, info, inicio, agora())
             registrar_evento(diretorio, evento)
             return evento

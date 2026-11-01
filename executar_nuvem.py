@@ -166,7 +166,7 @@ def executar(github, root):
         with TemporaryDirectory(prefix='caixa-') as temporario:
             pasta = Path(temporario)
             url_anterior = restaurar_anterior(github, release, pasta)
-            evento = coletor.executar(pasta)
+            evento = coletor.executar(pasta, consultar_pagina=False)
             if evento['status'] == 'arquivado':
                 csv = pasta / evento['arquivo']
                 url = github.publicar(evento, csv, csv.with_suffix('.json'))

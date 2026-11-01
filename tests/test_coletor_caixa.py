@@ -155,6 +155,13 @@ class ColetorCaixaTests(unittest.TestCase):
                 c.baixar_lista()
         self.assertEqual(req.call_count, 1)
 
+    def test_exportacao_nacional_direta_sem_consultar_html(self):
+        with patch.object(c, "requisitar", return_value=(planilha(), {}, c.CSV_URL)) as req:
+            dados, info = c.baixar_lista(consultar_pagina=False)
+        self.assertEqual(req.call_count, 1)
+        self.assertTrue(req.call_args.args[1].startswith(c.CSV_URL + "?"))
+        self.assertEqual(dados, planilha())
+
     def test_content_length_incompleto_rejeitado(self):
         class Resposta(io.BytesIO):
             url = c.CSV_URL
