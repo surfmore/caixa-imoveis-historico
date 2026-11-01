@@ -18,7 +18,7 @@ Coleta a cada hora a lista nacional da opção **Todos**, com as mesmas validaç
 
 Repositório do projeto: https://github.com/surfmore/caixa-imoveis-historico
 
-O workflow fica em .github/workflows/coletar-caixa.yml. O agendamento roda no minuto 17 de cada hora. Em atualizações do código do coletor ou do workflow, duas consultas, espaçadas por pelo menos um minuto, conferem a publicação e a restauração da última versão. Alterações somente em status/ não disparam outra execução.
+O workflow fica em .github/workflows/coletar-caixa.yml. O agendamento roda no minuto 17 de cada hora. Em atualizações do código do coletor ou do workflow, os testes e uma coleta são executados para validar a publicação. Alterações somente em status/ não disparam outra execução.
 
 Não precisa cadastrar segredo pessoal: usa apenas o GITHUB_TOKEN temporário do próprio repositório, com permissão contents:write. Nenhuma credencial da Cloudflare é necessária.
 
