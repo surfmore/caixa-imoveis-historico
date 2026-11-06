@@ -1,7 +1,7 @@
 {
   "versao": 1,
-  "inicio": "2026-11-06T04:56:43.842030-03:00",
-  "fim_download": "2026-11-06T04:57:05.413252-03:00",
+  "inicio": "2026-11-06T12:56:23.200001-03:00",
+  "fim_download": "2026-11-06T12:56:47.969066-03:00",
   "fuso": "America/Sao_Paulo",
   "fuso_origem": "IANA America/Sao_Paulo",
   "pagina_origem": "https://venda-imoveis.caixa.gov.br/sistema/download-lista.asp",
@@ -9,14 +9,14 @@
   "filtro_modalidade": null,
   "sha256": "2f4aac9fe2d0c6f2a9c3cdec3eaff9135a0bf922742168230cbf97eb577a8fa4",
   "bytes": 8762486,
-  "url_solicitada": "https://venda-imoveis.caixa.gov.br/listaweb/Lista_imoveis_geral.csv?1793951803860176346",
-  "url_final": "https://venda-imoveis.caixa.gov.br/listaweb/Lista_imoveis_geral.csv?1793951803860176346",
+  "url_solicitada": "https://venda-imoveis.caixa.gov.br/listaweb/Lista_imoveis_geral.csv?1793980583213733738",
+  "url_final": "https://venda-imoveis.caixa.gov.br/listaweb/Lista_imoveis_geral.csv?1793980583213733738",
   "cabecalhos_http": {
     "Content-Type": "application/octet-stream",
     "Content-Length": "8762486",
     "Last-Modified": "Fri, 06 Nov 2026 01:01:03 GMT",
     "ETag": "\"8688a4b8a6ddd1:0\"",
-    "Date": "Fri, 06 Nov 2026 07:56:45 GMT"
+    "Date": "Fri, 06 Nov 2026 15:56:25 GMT"
   },
   "tentativa": 1,
   "encoding": "cp1252",
@@ -72,11 +72,10 @@
     "SP": 3105,
     "TO": 27
   },
-  "status": "arquivado",
+  "status": "sem_alteracao",
   "arquivo": "planilhas/2026/11/caixa_imoveis_2026-11-06_04-57-05-413252-0300.csv",
-  "arquivo_anterior": "planilhas/2026/11/caixa_imoveis_2026-11-04_23-30-06-871045-0300.csv",
-  "url_arquivo": "https://github.com/surfmore/caixa-imoveis-historico/releases/download/untagged-63a32d5204fbfed36122/caixa_imoveis_2026-11-06_04-57-05-413252-0300.csv",
-  "workflow": "https://github.com/surfmore/caixa-imoveis-historico/actions/runs/42184175666",
+  "url_arquivo": "https://github.com/surfmore/caixa-imoveis-historico/releases/download/coleta-2026-11-06_04-57-05-413252-0300/caixa_imoveis_2026-11-06_04-57-05-413252-0300.csv",
+  "workflow": "https://github.com/surfmore/caixa-imoveis-historico/actions/runs/42247659359",
   "repositorio": "surfmore/caixa-imoveis-historico",
-  "registrado_em": "2026-11-06T04:57:09.973032-03:00"
+  "registrado_em": "2026-11-06T12:56:48.357026-03:00"
 }
