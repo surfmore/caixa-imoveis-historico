@@ -1,11 +1,13 @@
 # Histórico público dos imóveis da CAIXA
 
-Coleta a cada hora a lista nacional da opção **Todos**, com as mesmas validações e comparação exata do coletor Windows.
+Coleta a lista nacional da opção **Todos**, com as mesmas validações e comparação exata do coletor Windows. O agendamento é reforçado perto do horário de atualização observado.
 
 ## Funcionamento
 
 - GitHub Actions em **repositório público**, no runner padrão Ubuntu.
-- Uma consulta por hora, no minuto 17; execução manual por **Actions → Run workflow**.
+- Entre 22h02 e 23h57 de Brasília: disparos solicitados a cada cinco minutos.
+- Fora dessa janela: um disparo solicitado por hora, no minuto 17.
+- Execução manual por **Actions → Run workflow**. Os horários efetivos dependem do agendador do GitHub.
 - Quando o CSV muda, uma **Release** recebe o CSV original e o JSON de metadados.
 - O nome do CSV registra data, hora, microssegundos e fuso do download.
 - Antes de cada consulta, restaura o CSV da última release e verifica seu SHA-256.
@@ -18,7 +20,7 @@ Coleta a cada hora a lista nacional da opção **Todos**, com as mesmas validaç
 
 Repositório do projeto: https://github.com/surfmore/caixa-imoveis-historico
 
-O workflow fica em .github/workflows/coletar-caixa.yml. O agendamento roda no minuto 17 de cada hora. Em atualizações do código do coletor ou do workflow, os testes e uma coleta são executados para validar a publicação. Alterações somente em status/ não disparam outra execução.
+O workflow fica em .github/workflows/coletar-caixa.yml. Usa cron em UTC: 2-57/5 nas horas 1 e 2 (22h02–23h57 de Brasília), e minuto 17 nas demais horas. Em atualizações do código do coletor ou do workflow, os testes e uma coleta são executados para validar a publicação. Alterações somente em status/ não disparam outra execução.
 
 Não precisa cadastrar segredo pessoal: usa apenas o GITHUB_TOKEN temporário do próprio repositório, com permissão contents:write. Nenhuma credencial da Cloudflare é necessária.
 
@@ -60,3 +62,9 @@ Em 01/11/2026, 28 testes passaram no runner Ubuntu do GitHub. Uma planilha com 2
 Última execução validada: https://github.com/surfmore/caixa-imoveis-historico/actions/runs/41349707985
 
 Último resultado: [status/ultima_execucao.json](status/ultima_execucao.json). Planilhas: https://github.com/surfmore/caixa-imoveis-historico/releases
+
+## Janela de atualização observada
+
+Na verificação de 09/11/2026, os históricos local e online continham as mesmas cinco versões, com geração em 30/10 e 03, 04, 05 e 06/11. Os cabeçalhos Last-Modified das quatro alterações indicavam aproximadamente 22h01 de Brasília. Isso é uma observação inicial, não um compromisso de horário da CAIXA.
+
+O reforço de agendamento busca reduzir a demora para detectar a próxima alteração. O GitHub pode atrasar ou descartar disparos; a coleta local tem uma busca independente de minuto em minuto entre 22h e meia-noite. As sondagens locais usam HEAD, baixam o CSV ao detectar mudança e fazem uma confirmação integral a cada dez minutos enquanto aguardam. Depois de preservar uma nova versão, a busca rápida local para de consultar naquele dia. A coleta horária continua.

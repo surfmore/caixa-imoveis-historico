@@ -2,7 +2,9 @@ name: Coletar lista nacional da CAIXA
 
 on:
   schedule:
-    - cron: '17 * * * *'
+    # UTC: 01h/02h correspondem a 22h/23h em Brasilia (UTC-03).
+    - cron: '2-57/5 1,2 * * *'
+    - cron: '17 0,3-23 * * *'
   workflow_dispatch:
   push:
     branches: [main]
