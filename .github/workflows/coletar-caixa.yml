@@ -12,6 +12,7 @@ on:
       - '.github/workflows/coletar-caixa.yml'
       - 'coletar_caixa.py'
       - 'executar_nuvem.py'
+      - 'tests/**'
 
 permissions:
   contents: read

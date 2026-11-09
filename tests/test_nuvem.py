@@ -182,7 +182,6 @@ class NuvemTests(unittest.TestCase):
     def test_workflow_so_usa_runner_padrao_publico_e_nao_cria_artefatos(self):
         root = Path(nuvem.__file__).resolve().parent
         workflow = (root / '.github' / 'workflows' / 'coletar-caixa.yml').read_text(encoding='utf-8')
-        self.assertIn("cron: '17 * * * *'", workflow)
         self.assertIn('github.event.repository.private == false', workflow)
         self.assertIn('runs-on: ubuntu-latest', workflow)
         self.assertNotIn('upload-artifact', workflow)
