@@ -1,10 +1,10 @@
 {
   "versao": 1,
   "status": "erro",
-  "inicio": "2026-11-16T08:27:03.697160-03:00",
-  "fim": "2026-11-16T08:27:05.567385-03:00",
+  "inicio": "2026-11-16T19:08:09.150231-03:00",
+  "fim": "2026-11-16T19:08:11.126205-03:00",
   "tipo_erro": "HTTPError",
   "erro": "HTTP Error 403: Forbidden",
-  "workflow": "https://github.com/surfmore/caixa-imoveis-historico/actions/runs/43857809272",
-  "registrado_em": "2026-11-16T08:27:05.567419-03:00"
+  "workflow": "https://github.com/surfmore/caixa-imoveis-historico/actions/runs/43966992398",
+  "registrado_em": "2026-11-16T19:08:11.126230-03:00"
 }
